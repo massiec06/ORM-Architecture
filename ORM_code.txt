@@ -1,0 +1,2 @@
+SELECT DISTINCT user.id
+FROM comments;
