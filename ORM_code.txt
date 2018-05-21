@@ -1,2 +1,59 @@
-SELECT DISTINCT user.id
+SELECT DISTINCT id
 FROM comments;
+
+DB::select('user.id')
+    ->from('comments')
+    ->get();
+
+SELECT full_name
+FROM user
+WHERE user.name = "chris"
+
+DB::select('user.full_name')
+    ->from('user')
+    ->where('user.name', '=', 'chris')
+    ->get();
+
+SELECT body
+FROM comment
+ORDER BY user_id;
+
+DB::select('comment.body')
+    ->from('comment')
+    ->orderBy('comment.user_id')
+    ->get();
+
+SELECT body
+FROM comment
+LIMIT 2;
+
+DB::select('comment.body')
+    ->from('comment')
+    ->limit(2)
+    ->get();
+
+SELECT email
+FROM user
+GROUP BY full_name;
+
+DB::select('user.email')
+     ->from('user')
+     ->groupBy('user.full_name')
+     ->get();
+
+SELECT COUNT(id) AS total_users
+FROM User;
+
+DB::select(('user.count(id) as total_users'))
+      ->from(user)
+      ->get();
+
+SELECT user.full_name, post.id
+FROM user
+JOIN post
+ON user.id = post.user_id;
+
+DB::table('user')
+    ->join('post', 'user.id', '=', 'post.user_id')
+    ->select('user.full_name', 'post.id')
+    ->get();
